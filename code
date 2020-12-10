@@ -1,0 +1,59 @@
+# os-single-instance-algorithm
+#include<iostream>
+using namespace std;
+int main()
+{
+ int i,a,o=0,n,m[10],c[10],b[10],u,need,k=0,j,v[10],t,g;
+ cout<<"enter the number of processes: ";
+ cin>>n;
+ for(i=0;i<n;i++)
+ {cout<<endl<<"enter maximum resources requires and current resources available for process p"<<i<<":";
+    cin>>m[i]>>c[i];
+    k=k+c[i];}
+ cout<<"enter the total resources for all the processes:";
+ cin>>a;
+ a=a-k;
+ while(o<n)
+{  k=0;
+
+    for(i=0;i<n;i++)
+ {
+     need=m[i]-c[i];
+     if(need<=a)
+        {b[k++]=c[i];
+        v[k-1]=i;}
+ }
+
+if(k==0)
+ {
+     cout<<"system is unsafe";
+     break;
+ }
+cout<<"available resources are: "<<a<<endl;
+ for(i=0;i<k-1;i++)
+ {
+   for(j=0;j<k;j++)
+   {
+       if(b[j+1]<b[j])
+       {
+            t=b[j+1];
+           b[j+1]=b[j];
+           b[j]=t;
+            t=v[j+1];
+           v[j+1]=v[j];
+           v[j]=t;
+       }
+   }
+ }
+
+ cout<<o+1<<". process to be executed is:p"<<v[k-1]<<endl;
+ g=v[k-1];
+ a=a+c[g];
+ m[g]=2000;
+ c[g]=1000;
+ o++;
+}
+if(o==n)
+    cout<<"all processes are completed and the system is safe";
+return 0;
+}
