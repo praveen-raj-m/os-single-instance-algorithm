@@ -1,0 +1,1 @@
+# os-single-instance-algorithm
